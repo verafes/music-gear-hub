@@ -66,3 +66,10 @@ group :test do
   gem "selenium-webdriver"
 end
 
+gem 'simple_form'
+
+gem "devise", "~> 4.9"
+
+gem "email_validator", "~> 2.2"
+
+gem "strong_password", "~> 0.0.10"
