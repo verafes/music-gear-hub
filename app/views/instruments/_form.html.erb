@@ -8,8 +8,11 @@
     <%= f.input :category %>
     <%= f.input :price_per_day %>
     <%= f.input :available %>
-    <%= f.input :condition %>
-    <%= f.input :image %>
+    <%= f.input :condition, collection: Instrument::CONDITION, prompt: "Select condition", as: :select  %>
+  </div>
+  <div class="field">
+    <%= f.label :image %>
+    <%= f.file_field :image %>
   </div>
 
   <div class="form-actions">
