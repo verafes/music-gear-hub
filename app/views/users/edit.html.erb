@@ -1,0 +1,48 @@
+<section>
+  <div>
+    <h2>Edit User</h2>
+
+    <%= simple_form_for(@user, url: user_path(@user), html: { method: :put }) do |f| %>
+      <%= f.error_notification %>
+
+      <div>
+        <div>
+          <%= f.input :name, required: true, autofocus: true %>
+        </div>
+      </div>
+
+      <div>
+        <div>
+          <%= f.input :email, required: true %>
+        </div>
+      </div>
+
+      <div>
+        <div>
+          <%= f.input :password, autocomplete: "off", hint: "Leave blank if you don't want to change it", required: false %>
+        </div>
+      </div>
+
+      <div>
+        <div>
+          <%= f.input :password_confirmation, required: false %>
+        </div>
+      </div>
+
+      <div>
+        <div>
+          <%= f.input :current_password, hint: "We need your current password to confirm your changes", required: true %>
+        </div>
+      </div>
+
+      <%= f.button :submit, "Update" %>
+    <% end %>
+    <div>
+      <%= link_to "Back to profile", user_path(current_user) %>
+    </div>
+
+    <hr />
+    <h3>Cancel my account</h3>
+    <p>Unhappy? <%= link_to "Cancel my account", registration_path(:user), data: { confirm: "Are you sure?" }, method: :delete %></p>
+  </div>
+</section>
