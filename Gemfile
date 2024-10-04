@@ -74,3 +74,5 @@ gem "email_validator", "~> 2.2"
 
 gem "strong_password", "~> 0.0.10"
 
+gem 'bulma-rails', '~> 0.6.1'
+gem 'sassc-rails'

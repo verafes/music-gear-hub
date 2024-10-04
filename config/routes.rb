@@ -1,8 +1,14 @@
 Rails.application.routes.draw do
   devise_for :users, controllers: {
-    registrations: 'registrations'
+    registrations: 'registrations',
+    sessions: 'sessions',
   }
-#   resources :users, only: [:new]
+
+  resources :users, only: [:show, :edit, :update, :destroy, :index] do
+    collection do
+      get 'new', action: :new, as: :new
+    end
+  end
 
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
