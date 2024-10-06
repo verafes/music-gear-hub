@@ -8,13 +8,21 @@
     <%= f.input :category %>
     <%= f.input :price_per_day %>
     <%= f.input :available %>
-    <%= f.input :condition, collection: Instrument::CONDITION, prompt: "Select condition", as: :select  %>
-  </div>
+    <div class="collapse" id="conditionDropdown">
+      <%= f.input :condition, collection: Instrument::CONDITION, selected: @instrument.condition, prompt: "Select condition", as: :select %>
+    </div>
+
+    <% if @instrument.image.attached? %>
+      <div class="current-image">
+        <p><strong>Current Image:</strong></p>
+        <%= image_tag(url_for(@instrument.image), size: "300x300", alt: "Current instrument image") %>
+      </div>
+    <% end %>
+
   <div class="field">
     <%= f.label :image %>
     <%= f.file_field :image %>
   </div>
-
   <div class="form-actions">
     <%= f.button :submit %>
   </div>

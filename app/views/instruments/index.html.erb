@@ -2,14 +2,23 @@
 
 <% content_for :title, "Instruments" %>
 
-<h1>Instruments</h1>
+ <div>
+    <h1 class="title">
+      Browse the latest instruments on Music-Gear Hub
+    </h1>
+ </div>
 
 <div id="instruments">
   <% @instruments.each do |instrument| %>
-    <%= render instrument %>
-    <p>
-      <%= link_to "Show this instrument", instrument %>
-    </p>
+    <div class="instrument">
+      <div class="instrument-thumb">
+        <%= link_to image_tag(url_for(instrument.image), size: "150x150"), instrument %>
+      </div>
+      <%= render instrument %>
+      <p>
+        <%= link_to "Show this instrument", instrument %>
+      </p>
+    </div>
   <% end %>
 </div>
 

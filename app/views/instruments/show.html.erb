@@ -1,13 +1,16 @@
 <p style="color: green"><%= notice %></p>
 
-<%= render @instrument %>
+<div class="instrument-details">
+  <%= render @instrument %>
 
-<% if @instrument.image.attached? %>
-  <%= image_tag url_for(@instrument.image), alt: "Instrument image", class: "instrument-image", size: "300x300" %>
-<% else %>
-  <p>No image available</p>
-<% end %>
-
+  <div class="image-section">
+    <% if @instrument.image.attached? %>
+     <%= image_tag url_for(@instrument.image), alt: "Instrument image", class: "instrument-image", size: "300x300" %>
+    <% else %>
+      <p>No image available</p>
+    <% end %>
+  </div>
+</div>
 <div>
   <%= link_to "Edit this instrument", edit_instrument_path(@instrument) %> |
   <%= link_to "Back to instruments", instruments_path %>
