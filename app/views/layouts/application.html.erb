@@ -14,20 +14,24 @@
     <link rel="icon" href="/icon.svg" type="image/svg+xml">
     <link rel="apple-touch-icon" href="/icon.png">
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+    <%= javascript_importmap_tags %>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
   </head>
 
   <body>
     <% if flash[:notice] %>
-      <p class="notice"><%= flash[:notice] %></p>
+      <p class="notice text-center mt-3"><%= flash[:notice] %></p>
     <% end %>
     <% if flash[:alert].present? %>
-      <p class="my_alert"><%= flash[:alert] %></p>
+      <p class="my_alert text-center mt-3"><%= flash[:alert] %></p>
     <% end %>
 
-    <nav class="navbar">
+    <nav class="navbar container-fluid banner-background">
       <div class="navbar-brand">
         <%= link_to root_path, class:"navbar-item" do %>
-          <h1>Music-Gear Hub</h1>
+          <h1 class="px-3">Music-Gear Hub</h1>
         <% end  %>
       </div>
 
@@ -60,5 +64,7 @@
   <div class="container">
     <%= yield %>
   </div>
+
+    <%= render 'layouts/footer' %>
   </body>
 </html>

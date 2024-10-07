@@ -14,4 +14,120 @@
  *= require_self
  */
 
-@import "bulma";
+// @import "bulma";
+@import "bootstrap";
+@import "font-awesome";
+@import 'instruments';
+
+@font-face {
+  font-family: 'Krub';
+  src: url('Krub-Medium.ttf');
+}
+
+@font-face {
+  font-family: 'Krub';
+  src: url('Krub-SemiBold.ttf');
+}
+
+:root {
+  --bs-body-bg: #fff;
+  --spacing-none: 0;
+  --spacing-extra-small: .25rem;
+  --spacing-small: .5rem;
+  --spacing-medium: 1rem;
+  --spacing-large: 2rem;
+  --spacing-extra-large: 4rem;
+  --spacing-extra-extra-large: 8rem;
+  --spacing-extra-extra-extra-large: 16rem;
+}
+
+html, body {
+  height: 100%;
+  margin: 0;
+}
+
+body {
+  font-family: 'Krub', sans-serif;
+  word-spacing: 1px;
+  font-weight: 400;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.banner-background {
+  background-image: url('hero-saxophone.jpg');
+  background-size: cover;
+  font-family: 'Krub', sans-serif;
+  font-weight: 700;
+  word-spacing: 1px;
+}
+
+ .navbar-brand h1 {
+   text-decoration: none !important;
+   color: white !important;
+ }
+
+ .navbar-brand h1:hover {
+   text-decoration: none !important;
+   color: white !important;
+ }
+
+ .navbar-brand a:hover {
+   text-decoration: none;
+   color: white;
+ }
+
+.navbar-item, .navbar-link {
+  text-decoration: none;
+  color: inherit;
+
+  &:hover {
+    text-decoration: none;
+    color: inherit;
+    cursor: pointer;
+  }
+}
+
+.navbar-menu {
+  color: white;
+  background: #4b2101ff;
+  padding: 0.5rem;
+  margin-right: 1rem;
+}
+
+a {
+  text-decoration: none;
+  color: blue;
+}
+
+a:hover {
+  text-decoration: none;
+  color: blue;
+}
+
+h1 {
+  color: #4b2101ff;
+  text-align: center;
+  margin-bottom: 1rem
+}
+
+.container {
+  flex: 1;
+}
+
+.my_alert {
+  color: red;
+}
+
+.form-select {
+  background-color: white;
+}
+
+.footer {
+  background-color: #facbbc;
+  bottom: 0;
+  width: 100%;
+  font-size: 0.8rem;
+  text-align: center;
+}

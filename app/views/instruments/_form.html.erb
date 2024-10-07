@@ -1,29 +1,61 @@
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-md-10">
+      <%= simple_form_for @instrument, html: { multipart: true } do |f| %>
+        <%= f.error_notification %>
+        <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
 
-<%= simple_form_for(@instrument) do |f| %>
-  <%= f.error_notification %>
-  <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
+        <div class="form-group row mb-3 required">
+          <div class="col-md-9">
+            <%= f.input :name, required: true, input_html: { class: "form-control" }, wrapper: false %>
+          </div>
+          <div class="col-md-3">
+            <%= f.input :price_per_day, required: true, input_html: { class: "form-control", maxlength: 7 }, wrapper: false %>
+          </div>
+        </div>
 
-  <div class="form-inputs">
-    <%= f.input :name %>
-    <%= f.input :category %>
-    <%= f.input :price_per_day %>
-    <%= f.input :available %>
-    <div class="collapse" id="conditionDropdown">
-      <%= f.input :condition, collection: Instrument::CONDITION, selected: @instrument.condition, prompt: "Select condition", as: :select %>
+        <div class="form-group mb-3">
+          <%= f.input :category, required: true, input_html: { class: "form-control" }, wrapper: false %>
+        </div>
+
+        <div class="form-group row align-items-center mb-3">
+          <div class="col-md-6 d-flex align-items-center">
+            <%= f.label :available, 'Available?', class: "form-label me-3" %> <!-- Label for Available -->
+            <div class="form-check form-check-inline me-2">
+              <%= f.radio_button :available, true, checked: @instrument.available, class: "form-check-input", id: 'available_yes' %>
+              <%= f.label :available_yes, 'Yes', class: "form-check-label" %>
+            </div>
+            <div class="form-check form-check-inline">
+              <%= f.radio_button :available, false, checked: !@instrument.available, class: "form-check-input", id: 'available_no' %>
+              <%= f.label :available_no, 'No', class: "form-check-label" %>
+            </div>
+          </div>
+
+          <div class="col-md-6">
+            <%= f.label :condition, 'Condition', class: "form-label" %> <!-- Label for Condition -->
+            <%= f.select :condition,
+              options_for_select([['New', 'new'], ['Used', 'used'], ['Refurbished', 'refurbished']], @instrument.condition),
+              { prompt: 'Select condition' },
+              { class: "form-select" } %>
+          </div>
+        </div>
+
+        <% if @instrument.image.attached? %>
+          <div class="current-image mb-3">
+            <p><strong>Current Image:</strong></p>
+            <%= image_tag(url_for(@instrument.image), size: "300x300", alt: "Current instrument image") %>
+          </div>
+        <% end %>
+
+        <div class="form-group mb-3">
+          <%= f.label :image, class: "form-label" %>
+          <%= f.file_field :image, class: "form-control custom-file-input", style: "border: none; outline: none;" %>
+        </div>
+
+        <div class="form-actions mb-3">
+          <%= f.button :submit, class: "btn btn-primary btn-custom border-0 me-3" %>
+        </div>
+      <% end %>
     </div>
-
-    <% if @instrument.image.attached? %>
-      <div class="current-image">
-        <p><strong>Current Image:</strong></p>
-        <%= image_tag(url_for(@instrument.image), size: "300x300", alt: "Current instrument image") %>
-      </div>
-    <% end %>
-
-  <div class="field">
-    <%= f.label :image %>
-    <%= f.file_field :image %>
   </div>
-  <div class="form-actions">
-    <%= f.button :submit %>
-  </div>
-<% end %>
+</div>
