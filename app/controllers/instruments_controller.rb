@@ -39,6 +39,7 @@ class InstrumentsController < ApplicationController
 
   # PATCH/PUT /instruments/1 or /instruments/1.json
   def update
+    puts "Instrument Params: #{instrument_params.inspect}"
     respond_to do |format|
       if @instrument.update(instrument_params)
         format.html { redirect_to @instrument, notice: "Instrument was successfully updated." }
@@ -68,6 +69,6 @@ class InstrumentsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def instrument_params
-      params.require(:instrument).permit(:name, :category, :price_per_day, :available, :condition, :image)
+      params.require(:instrument).permit(:name, :category, :description, :price_per_day, :available, :condition, :image)
     end
 end

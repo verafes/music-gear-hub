@@ -16,20 +16,30 @@
 
         <div class="form-group mb-3">
           <%= f.input :category, required: true, input_html: { class: "form-control" }, wrapper: false %>
+
+        </div>
+
+        <div class="form-group mb-3">
+          <div class="col-md-12">
+            <%= f.label :description, class: "form-label" %>
+           <%= f.text_area :description, rows: 4, maxlength: 200, class: "form-control", style: "width: 100%;" %>
+          </div>
         </div>
 
         <div class="form-group row align-items-center mb-3">
-          <div class="col-md-6 d-flex align-items-center">
-            <%= f.label :available, 'Available?', class: "form-label me-3" %> <!-- Label for Available -->
-            <div class="form-check form-check-inline me-2">
-              <%= f.radio_button :available, true, checked: @instrument.available, class: "form-check-input", id: 'available_yes' %>
-              <%= f.label :available_yes, 'Yes', class: "form-check-label" %>
-            </div>
-            <div class="form-check form-check-inline">
-              <%= f.radio_button :available, false, checked: !@instrument.available, class: "form-check-input", id: 'available_no' %>
-              <%= f.label :available_no, 'No', class: "form-check-label" %>
-            </div>
-          </div>
+<div class="col-md-6">
+    <%= f.label :available, 'Available?', class: "form-label" %> <!-- Label for Available -->
+    <div class="d-flex"> <!-- Use d-flex to align radio buttons on the same line -->
+      <div class="form-check me-3"> <!-- Add some margin-right to space the options -->
+        <%= f.radio_button :available, true, checked: @instrument.available, class: "form-check-input", id: 'available_yes' %>
+        <%= f.label :available_yes, 'Yes', class: "form-check-label" %>
+      </div>
+      <div class="form-check">
+        <%= f.radio_button :available, false, checked: !@instrument.available, class: "form-check-input", id: 'available_no' %>
+        <%= f.label :available_no, 'No', class: "form-check-label" %>
+      </div>
+    </div>
+  </div>
 
           <div class="col-md-6">
             <%= f.label :condition, 'Condition', class: "form-label" %> <!-- Label for Condition -->

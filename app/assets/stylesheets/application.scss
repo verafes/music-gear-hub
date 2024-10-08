@@ -44,12 +44,14 @@
 html, body {
   height: 100%;
   margin: 0;
+  font-size: 16px;
 }
 
 body {
   font-family: 'Krub', sans-serif;
   word-spacing: 1px;
-  font-weight: 400;
+  font-size: 1rem;
+//   font-weight: 400;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
