@@ -74,12 +74,17 @@ GEM
     addressable (2.8.7)
       public_suffix (>= 2.0.2, < 7.0)
     ast (2.4.2)
+    autoprefixer-rails (10.4.19.0)
+      execjs (~> 2)
     base64 (0.2.0)
     bcrypt (3.1.20)
     bigdecimal (3.1.8)
     bindex (0.8.1)
     bootsnap (1.18.4)
       msgpack (~> 1.2)
+    bootstrap (5.3.3)
+      autoprefixer-rails (>= 9.1.0)
+      popper_js (>= 2.11.8, < 3)
     brakeman (6.2.1)
       racc
     builder (3.3.0)
@@ -111,6 +116,7 @@ GEM
     email_validator (2.2.4)
       activemodel
     erubi (1.13.0)
+    execjs (2.9.1)
     ffi (1.17.0-aarch64-linux-gnu)
     ffi (1.17.0-aarch64-linux-musl)
     ffi (1.17.0-arm-linux-gnu)
@@ -121,6 +127,8 @@ GEM
     ffi (1.17.0-x86_64-darwin)
     ffi (1.17.0-x86_64-linux-gnu)
     ffi (1.17.0-x86_64-linux-musl)
+    font-awesome-sass (6.5.2)
+      sassc (~> 2.0)
     globalid (1.2.1)
       activesupport (>= 6.1)
     i18n (1.14.6)
@@ -179,6 +187,7 @@ GEM
     parser (3.3.5.0)
       ast (~> 2.4.1)
       racc
+    popper_js (2.11.8)
     psych (5.1.2)
       stringio
     public_suffix (6.0.1)
@@ -351,12 +360,14 @@ PLATFORMS
 
 DEPENDENCIES
   bootsnap
+  bootstrap (~> 5.3)
   brakeman
   bulma-rails (~> 0.6.1)
   capybara
   debug
   devise (~> 4.9)
   email_validator (~> 2.2)
+  font-awesome-sass (~> 6.5)
   importmap-rails
   jbuilder
   puma (>= 5.0)

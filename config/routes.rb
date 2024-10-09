@@ -1,14 +1,11 @@
 Rails.application.routes.draw do
+  resources :instruments
   devise_for :users, controllers: {
     registrations: 'registrations',
     sessions: 'sessions',
   }
 
-  resources :users, only: [:show, :edit, :update, :destroy, :index] do
-    collection do
-      get 'new', action: :new, as: :new
-    end
-  end
+  resources :users, only: [:show, :edit, :update, :destroy, :index]
 
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
@@ -21,5 +18,5 @@ Rails.application.routes.draw do
   get "manifest" => "rails/pwa#manifest", as: :pwa_manifest
 
   # Defines the root path route ("/")
-  root "store#index"
+  root "instruments#index"
 end

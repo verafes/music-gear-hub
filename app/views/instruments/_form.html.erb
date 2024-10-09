@@ -1,0 +1,77 @@
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-md-10">
+      <%= simple_form_for @instrument, html: { multipart: true } do |f| %>
+        <%= f.error_notification %>
+        <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
+
+        <div class="form-group row mb-3 required">
+          <div class="col-md-9">
+            <%= f.input :name, required: true, input_html: { class: "form-control" }, wrapper: false %>
+          </div>
+          <div class="col-md-3">
+            <%= f.input :price_per_day, required: true, input_html: { class: "form-control", maxlength: 7 }, wrapper: false %>
+          </div>
+        </div>
+
+        <div class="form-group mb-3">
+          <%= f.input :category,
+                      required: true,
+                      input_html: { class: "form-control", placeholder: "Type categories..." },
+                      wrapper: false %>
+          <small class="form-text text-muted">Available categories: Musical Instruments, Audio Equipment, DJ Gear, Accessories</small>
+        </div>
+
+        <div class="form-group mb-3">
+          <div class="col-md-12">
+            <%= f.label :description, class: "form-label" %>
+           <%= f.text_area :description, rows: 4, maxlength: 250, class: "form-control", style: "width: 100%;" %>
+          </div>
+        </div>
+
+        <div class="form-group row align-items-center mb-3">
+        <div class="col-md-6">
+            <%= f.label :available, 'Available?', class: "form-label" %>
+            <div class="d-flex">
+              <div class="form-check me-3">
+                <%= f.radio_button :available, true, checked: @instrument.available, class: "form-check-input", id: 'available_yes' %>
+                <%= f.label :available_yes, 'Yes', class: "form-check-label" %>
+              </div>
+              <div class="form-check">
+                <%= f.radio_button :available, false, checked: !@instrument.available, class: "form-check-input", id: 'available_no' %>
+                <%= f.label :available_no, 'No', class: "form-check-label" %>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-6">
+            <%= f.label :condition, 'Condition', class: "form-label" %>
+            <%= f.select :condition,
+              options_for_select(Instrument::CONDITION.map { |cond| [cond, cond.downcase] }, @instrument.condition),
+              { prompt: 'Select condition' },
+              { class: "form-select" } %>
+          </div>
+        </div>
+
+        <% if @instrument.image.attached? %>
+          <div class="current-image mb-3">
+            <p><strong>Current Image:</strong></p>
+            <%= image_tag(url_for(@instrument.image),
+                           style: "max-width: 200px; max-height: 200px; width: auto; height: auto; object-fit: contain;",
+                           alt: "Current instrument image",
+                           class: "instrument-image img-fluid mb-3") %>
+          </div>
+        <% end %>
+
+        <div class="form-group mb-3">
+          <%= f.label :image, class: "form-label" %>
+          <%= f.file_field :image, class: "form-control custom-file-input", style: "border: none; outline: none;" %>
+        </div>
+
+        <div class="form-actions mb-3">
+          <%= f.button :submit, class: "btn btn-primary btn-custom border-0 me-3" %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

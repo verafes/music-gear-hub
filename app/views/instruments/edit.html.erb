@@ -1,0 +1,19 @@
+<% content_for :title, "Editing instrument" %>
+
+
+<div class="container mt-4">
+  <h1 class="mb-4 text-center">Editing instrument</h1>
+
+  <div class="row justify-content-center">
+    <div class="col-md-9">
+      <%= render "form", instrument: @instrument %>
+
+      <br>
+
+      <div class="mt-3 d-flex justify-content-center">
+        <%= link_to "Show this instrument", @instrument, class: "btn btn-info btn-custom border-0 me-3" %>
+        <%= link_to "Back to instruments", instruments_path, class: "btn btn-custom border-0 me-3" %>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,5 @@
+#!/usr/bin/env ruby
+
+require_relative "../config/application"
+require "importmap/commands"
+pin "bootstrap", to: "https://ga.jspm.io/npm:bootstrap@5.3.0/dist/js/bootstrap.esm.js"

@@ -76,3 +76,5 @@ gem "strong_password", "~> 0.0.10"
 
 gem 'bulma-rails', '~> 0.6.1'
 gem 'sassc-rails'
+gem "bootstrap", "~> 5.3"
+gem "font-awesome-sass", "~> 6.5"
