@@ -5,7 +5,7 @@ Rails.application.routes.draw do
     sessions: 'sessions',
   }
 
-  resources :users, only: [:show, :edit, :update, :destroy, :index]
+  resources :users, only: [:show, :edit, :update, :index]
 
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 

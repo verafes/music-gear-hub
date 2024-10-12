@@ -1,4 +1,4 @@
-class SessionsController < ApplicationController
+class SessionsController < Devise::SessionsController
   def destroy
     super do |resource|
       if resource.nil?

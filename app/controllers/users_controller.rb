@@ -1,9 +1,14 @@
 class UsersController < ApplicationController
-#     before_action :authenticate_user!, only: [:show, :edit, :update, :destroy]
+    before_action :authenticate_user!, only: [:show, :edit, :update, :destroy]
     before_action :set_user, only: [:show, :edit, :update, :destroy]
 
     def index
       @users = User.all
+      if (session[:current_user])
+        @current_user = User.find(session[:current_user])
+      else
+        @current_user = nil
+      end
     end
 
     # Show user profile
@@ -27,7 +32,8 @@ class UsersController < ApplicationController
     end
 
     def destroy
-        @user.destroy
+        session.clear
+#         @user.destroy
         redirect_to root_path, notice: 'User account has been deleted.'
     end
 

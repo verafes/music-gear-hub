@@ -1,6 +1,8 @@
 <% content_for :header do %>
 <section class="hero is-warning">
-  <p style="color: green"><%= notice %></p>
+  <% if flash[:notice] %>
+    <p class="text-success color: green text-center mt-3"><%= flash[:notice] %></p>
+  <% end %>
   <div class="hero-body">
     <% content_for :title, "Instruments" %>
     <div class="container">
