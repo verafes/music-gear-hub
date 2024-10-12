@@ -1,0 +1,15 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  instrument: one
+  cart: one
+  start_date: 2024-10-11
+  end_date: 2024-10-11
+  total_days: 1
+
+two:
+  instrument: two
+  cart: two
+  start_date: 2024-10-11
+  end_date: 2024-10-11
+  total_days: 1
