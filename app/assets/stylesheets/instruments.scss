@@ -1,0 +1,31 @@
+// Place all the styles related to the Instruments controller here.
+abbr[title] {
+    text-decoration: none !important;
+}
+
+.container {
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+.btn-custom {
+    background-color: #4b2101ff;
+    color: white;
+}
+
+.instrument-show {
+  .feature-image img {
+    width: 100%;
+  }
+  .add-to-cart {
+    width: 100%;
+  }
+}
+
+.custom-file-input::file-selector-button {
+  background-color: #facbbc;
+}
+
+.custom-file-input::file-selector-button:hover {
+  color: #222;
+}

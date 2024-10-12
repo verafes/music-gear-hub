@@ -14,45 +14,60 @@
     <link rel="icon" href="/icon.svg" type="image/svg+xml">
     <link rel="apple-touch-icon" href="/icon.png">
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_importmap_tags %>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
   </head>
 
   <body>
-    <% if flash[:notice] %>
-      <p class="notice"><%= notice %></p>
-    <% end %>
     <% if flash[:alert].present? %>
-      <p class="my_alert"><%= flash[:alert] %></p>
+      <p class="my_alert text-center mt-3"><%= flash[:alert] %></p>
     <% end %>
 
-    <nav class="navbar">
+    <nav class="navbar container-fluid banner-background">
       <div class="navbar-brand">
         <%= link_to root_path, class:"navbar-item" do %>
-          <h1>Music-Gear Hub</h1>
+          <h1 class="px-3">Music-Gear Hub</h1>
         <% end  %>
       </div>
 
       <div id="navbar" class="navbar-menu">
-      <div class="navbar-end">
-        <div class="navbar-item">
-          <div class="field is-grouped">
+        <div class="navbar-end">
+          <div class="navbar-item">
+            <div class="field is-grouped d-flex flex-row">
 
-          <% if user_signed_in? %>
-            <div class="navbar-item has-dropdown is-hoverable">
-              <%= link_to 'Account', user_path(current_user), class: "navbar-link" %>
-            <div class="navbar-dropdown is-right">
-              <%= link_to current_user.name, user_path(current_user), class:"navbar-item" %>
-              <%= link_to "Log Out", destroy_user_session_path, method: :delete, class:"navbar-item" %>
-            </div>
-          </div>
-          <% else %>
-            <%= link_to "Sign In", new_user_session_path, class:"navbar-item button is-warning" %>
-            <%= link_to "Sign up", new_user_registration_path, class:"navbar-item button is-warning"%>
-          <% end %>
+              <% if user_signed_in? %>
+                <div class="nav-item mx-2">
+                  <%= link_to 'Sell', new_instrument_path, class: "btn btn-custom border-0" %>
+                </div>
+                <div class="dropdown">
+                    <%= link_to 'Account', "#", class: "btn btn-custom border-0 dropdown-toggle", id: "dropdownMenuButton", data: { toggle: "dropdown" }, aria: { haspopup: "true", expanded: "false" } %>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                      <%= link_to current_user.name, user_path(current_user), class: "dropdown-item" %>
+                      <%= link_to "Log Out", destroy_user_session_path, method: :delete, class: "dropdown-item" %>
+                    </div>
+                  </div>
+              <% else %>
+                <div class="nav-item me-2">
+                  <%= link_to "Sign In", new_user_session_path, class: "btn btn-warning btn-custom border-0" %>
+                </div>
+              <div class="nav-item">
+                <%= link_to "Sign Up", new_user_registration_path, class: "btn btn-warning btn-custom border-0" %>
+              </div>
+            <% end %>
           </div>
         </div>
       </div>
+    </nav>
+
+    <%= yield(:header) %>
+
+    <div class="container">
+      <%= yield %>
     </div>
-  </nav>
-   <%= yield %>
+
+    <%= render 'layouts/footer' %>
   </body>
 </html>
