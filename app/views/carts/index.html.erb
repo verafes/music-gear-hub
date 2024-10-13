@@ -2,7 +2,7 @@
 
 <% content_for :title, "Carts" %>
 
-<h1>Carts</h1>
+<h1 class="my-4">Carts</h1>
 
 <div id="carts">
   <% @carts.each do |cart| %>
@@ -13,4 +13,26 @@
   <% end %>
 </div>
 
-<%= link_to "New cart", new_cart_path %>
+<table class="table table-striped table-hover">
+  <thead>
+    <tr>
+      <th>Actions</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @carts.each do |cart| %>
+      <tr>
+        <td>
+          <%= link_to 'Show', cart, class: "btn btn-sm btn-primary" %>
+          <%= link_to 'Edit', edit_cart_path(cart), class: "btn btn-sm btn-warning" %>
+          <%= link_to 'Delete', cart, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-sm btn-danger" %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<tr>
+
+<%= link_to "New cart", new_cart_path, class: "btn btn-success" %>

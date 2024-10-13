@@ -5,11 +5,13 @@ class LineItemsController < ApplicationController
 
   # GET /line_items or /line_items.json
   def index
-    @line_items = LineItem.all
+#     @line_items = LineItem.all
+    @line_items = LineItem.includes(:instrument).all
   end
 
   # GET /line_items/1 or /line_items/1.json
   def show
+      @line_item = LineItem.find(params[:id])
   end
 
   # GET /line_items/new
@@ -25,7 +27,6 @@ class LineItemsController < ApplicationController
   def create
     instrument = Instrument.find(params[:instrument_id])
     @line_item = @cart.add_instrument(instrument)
-#     @line_item = LineItem.new(line_item_params)
 
     respond_to do |format|
       if @line_item.save
@@ -65,7 +66,7 @@ class LineItemsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_line_item
-      @line_item = LineItem.find(params[:id])
+      @line_item = LineItem.includes(:instrument).find(params[:id])
     end
 
     # Only allow a list of trusted parameters through.

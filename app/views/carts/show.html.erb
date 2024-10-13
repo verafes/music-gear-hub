@@ -1,10 +1,22 @@
 <p style="color: green"><%= notice %></p>
 
-<%= render @cart %>
-
-<div>
-  <%= link_to "Edit this cart", edit_cart_path(@cart) %> |
-  <%= link_to "Back to carts", carts_path %>
-
-  <%= button_to "Destroy this cart", @cart, method: :delete %>
+<div class="text-end my-4">
+  <%= link_to 'Keep Shopping', instruments_path, class: 'btn btn-warning' %>
 </div>
+
+<hr />
+
+<section class="mt-4">
+  <%= render(@cart.line_items) %>
+
+  <div class="row">
+    <div class="col">
+      <%= button_to 'Empty Cart', @cart, method: :delete, data: { confirm: "Are you sure?" }, class: "btn btn-danger" %>
+    </div>
+    <div class="col text-end">
+      <h4 class="fw-bold">
+        <span class="text-muted">Total:</span> <%= number_to_currency(@cart.total_price) %>
+      </h4>
+    </div>
+  </div>
+</section>

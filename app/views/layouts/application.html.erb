@@ -22,14 +22,10 @@
   </head>
 
   <body>
-    <% if flash[:alert].present? %>
-      <p class="my_alert text-center mt-3"><%= flash[:alert] %></p>
-    <% end %>
-
-    <nav class="navbar container-fluid banner-background">
-      <div class="navbar-brand">
+    <nav class="navbar container-fluid banner-background mb-3">
+      <div class="navbar-brand pt-3">
         <%= link_to root_path, class:"navbar-item" do %>
-          <h1 class="px-3">Music-Gear Hub</h1>
+          <h1 class="px-3 display-4">Music-Gear Hub</h1>
         <% end  %>
       </div>
 
@@ -40,7 +36,7 @@
 
               <% if user_signed_in? %>
                 <div class="nav-item mx-2">
-                  <%= link_to 'Sell', new_instrument_path, class: "btn btn-custom border-0" %>
+                  <%= link_to 'Post for Rent', new_instrument_path, class: "btn btn-custom border-0" %>
                 </div>
                 <div class="dropdown">
                     <%= link_to 'Account', "#", class: "btn btn-custom border-0 dropdown-toggle", id: "dropdownMenuButton", data: { toggle: "dropdown" }, aria: { haspopup: "true", expanded: "false" } %>
@@ -61,6 +57,10 @@
         </div>
       </div>
     </nav>
+
+    <% if flash[:alert].present? %>
+      <p class="my_alert text-center mt-3"><%= flash[:alert] %></p>
+    <% end %>
 
     <%= yield(:header) %>
 

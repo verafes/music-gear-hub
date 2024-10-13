@@ -5,7 +5,7 @@ class Cart < ApplicationRecord
     current_item = line_items.find_by(instrument_id: instrument.id)
 
     if current_item
-      current_item.increment(:quantity)
+      current_item.increment(:total_days)
     else
       current_item = line_items.build(instrument_id: instrument.id)
     end
