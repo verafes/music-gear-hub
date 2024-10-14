@@ -1,10 +1,6 @@
-<div class="row justify-content-center mb-4 border p-3 rounded col-md-6">
+<div class="row justify-content-center mb-4 p-1 col-md-6">
   <div class="col-12">
     <div class="row">
-      <div class="col-6">
-        <strong>Total days:</strong>
-        <%= line_item.total_days %>
-      </div>
       <div class="col-6 text-end">
         <figure class="figure">
           <% if line_item.instrument.image.attached? %>
@@ -21,30 +17,63 @@
   </div>
 
   <div id="<%= dom_id line_item %>" class="col-12">
-      <div class="row mb-2">
-        <div class="col-12">
-          <strong><%= line_item.instrument.name %></strong>
-        </div>
+    <div class="row mb-2">
+      <div class="col-12">
+        <strong><%= line_item.instrument.name %></strong>
       </div>
+    </div>
+
+    <div class="row mb-2">
+      <div class="col-12 text-end">
+        <p>
+          Price per day:
+          <strong class="h4"> <%= number_to_currency(line_item.instrument.price_per_day) %></strong>
+        </p>
+      </div>
+    </div>
+
+
+    <div id="date-prompt" class="mb-3">
+      <p>Please enter start and end dates for your items.</p>
+      <button id="open-date-form" class="btn btn-primary btn-custom border-0 ">Enter Dates</button>
+    </div>
+
+    <%= form_with model: line_item, method: :put, action: line_item_path, local: true do |form| %>
       <div class="row mb-2">
         <div class="col-6">
-          <strong>Start date:</strong>
-          <%= line_item.start_date %>
+          <strong>Rental starts:</strong>
+          <%= form.date_field :start_date, value: line_item.start_date, class: 'form-control', required: true, id: "start_date_#{line_item.id}" %>
         </div>
+
         <div class="col-6 text-end">
-          <strong>End date:</strong>
-          <%= line_item.end_date %>
+          <strong>Rental ends:</strong>
+          <%= form.date_field :end_date, value: line_item.end_date, class: 'form-control', required: true, id: "end_date_#{line_item.id}" %>
         </div>
       </div>
-      <div class="row mb-2">
-        <div class="col-12 text-end">
-          <strong class="h4"><%= number_to_currency(line_item.instrument.price_per_day) %></strong>
-        </div>
+
+      <div class="col-6">
+        <strong>Total days:</strong>
+        <span id="total_days_#{line_item.id}"><%= line_item.total_days %></span>
       </div>
+
+      <div class="col-12 text-end">
+        <%= form.hidden_field "cart", value: cart.id.to_s %>
+        <%= form.submit "Save Dates", class: "btn btn-primary mt-2 btn-sm btn-custom border-0" %>
+      </div>
+    <% end %>
+
+    <div class="row mt-4">
+      <div class="col-12 text-end">
+        <p>
+          Total Price for <%= line_item.total_days %> days:
+          <strong class="h4"> <%= number_to_currency(line_item.total_price) %></strong>
+        </p>
+      </div>
+    </div>
   </div>
 </div>
 <div class="text-end mb-4 mr-md-3 col-md-6">
   <%= link_to 'Remove Item', line_item, method: :delete, data: { confirm: "Are you sure?" }, class: "btn btn-danger btn-sm" %>
 </div>
 
-</hr>
+<hr/ >

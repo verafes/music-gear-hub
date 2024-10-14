@@ -9,11 +9,12 @@ class InstrumentsController < ApplicationController
 
   # GET /instruments/1 or /instruments/1.json
   def show
+    @instrument = Instrument.find(params[:id])
+    @line_item = LineItem.new
   end
 
   # GET /instruments/new
   def new
-#     @instrument = Instrument.new
     @instrument = current_user.instruments.build
   end
 
@@ -23,7 +24,6 @@ class InstrumentsController < ApplicationController
 
   # POST /instruments or /instruments.json
   def create
-#     @instrument = Instrument.new(instrument_params)
     @instrument = current_user.instruments.build(instrument_params)
 
     respond_to do |format|

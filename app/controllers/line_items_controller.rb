@@ -11,7 +11,7 @@ class LineItemsController < ApplicationController
 
   # GET /line_items/1 or /line_items/1.json
   def show
-      @line_item = LineItem.find(params[:id])
+    @line_item = LineItem.find(params[:id])
   end
 
   # GET /line_items/new
@@ -30,7 +30,7 @@ class LineItemsController < ApplicationController
 
     respond_to do |format|
       if @line_item.save
-        format.html { redirect_to @line_item, notice: "Item added to cart." }
+        format.html { redirect_to cart_path(@cart), notice: "Item added to cart." }
         format.json { render :show, status: :created, location: @line_item }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -43,7 +43,7 @@ class LineItemsController < ApplicationController
   def update
     respond_to do |format|
       if @line_item.update(line_item_params)
-        format.html { redirect_to @line_item, notice: "Line item was successfully updated." }
+        format.html { redirect_to cart_path(params[:line_item][:cart].to_i), notice: "Line item was successfully updated." }
         format.json { render :show, status: :ok, location: @line_item }
       else
         format.html { render :edit, status: :unprocessable_entity }

@@ -7,6 +7,7 @@
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
+
     <%= yield :head %>
 
     <link rel="manifest" href="/manifest.json">
@@ -30,9 +31,20 @@
       </div>
 
       <div id="navbar" class="navbar-menu">
-        <div class="navbar-end">
+        <div class="navbar-end ">
           <div class="navbar-item">
-            <div class="field is-grouped d-flex flex-row">
+            <div class="field is-grouped d-flex flex-row align-items-center">
+
+              <% if total_cart_items %>
+                <%= link_to cart_path(@cart), class:"navbar-item button is-warning" do %>
+                  <span class="icon is-small">
+                    <i class="fa fa-shopping-cart"></i>
+                  </span>
+                  <span>
+                    Cart <%= cart_count_over_one %>
+                  </span>
+                <% end %>
+              <% end %>
 
               <% if user_signed_in? %>
                 <div class="nav-item mx-2">
@@ -46,7 +58,7 @@
                     </div>
                   </div>
               <% else %>
-                <div class="nav-item me-2">
+                <div class="nav-item mx-2">
                   <%= link_to "Sign In", new_user_session_path, class: "btn btn-warning btn-custom border-0" %>
                 </div>
               <div class="nav-item">
