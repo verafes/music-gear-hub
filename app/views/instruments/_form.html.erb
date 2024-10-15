@@ -14,7 +14,7 @@
           </div>
         </div>
 
-        <div class="form-group mb-3">
+        <div class="form-group mb-3 ">
           <%= f.input :category,
                       required: true,
                       input_html: { class: "form-control", placeholder: "Type categories..." },
@@ -31,7 +31,7 @@
 
         <div class="form-group row align-items-center mb-3">
         <div class="col-md-6">
-            <%= f.label :available, 'Available?', class: "form-label" %>
+            <%= f.label :available, '* Available?', class: "form-label" %>
             <div class="d-flex">
               <div class="form-check me-3">
                 <%= f.radio_button :available, true, checked: @instrument.available, class: "form-check-input", id: 'available_yes' %>

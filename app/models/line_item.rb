@@ -8,6 +8,6 @@ class LineItem < ApplicationRecord
 
     def total_days
       return 1 unless start_date && end_date
-      (end_date - start_date).to_i
+      (end_date - start_date).to_i + 1
     end
 end

@@ -6,7 +6,7 @@
 
 <hr />
 
-<section class="mt-4">
+<section class=" mt-4">
 
     <%= render @cart.line_items, cart: @cart %>
 
@@ -20,14 +20,18 @@
         </h4>
       </div>
     </div>
-    <%= form_with url: cart_path(@cart), method: :patch, local: true do %>
+  <%= form_with url: cart_path(@cart), method: :patch, local: true do %>
     <div class="row text-end mt-2">
       <div class="col">
+      <% if all_items_have_dates?(@cart) %>
         <% if user_signed_in? %>
           <%= submit_tag "Book now", class: "btn btn-success" %>
         <% else %>
           <%= link_to "Book now", new_user_session_path, class: "btn btn-success" %>
         <% end %>
+      <% else %>
+          <p class="text-danger">Please fill in the rental start and end dates for all items to proceed.</p>
+      <% end %>
       </div>
     </div>
   <% end %>

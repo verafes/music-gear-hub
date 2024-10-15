@@ -1,4 +1,5 @@
 <div class="row justify-content-center mb-4 p-1 col-md-6">
+
   <div class="col-12">
     <div class="row">
       <div class="col-6 text-end">
@@ -32,11 +33,11 @@
       </div>
     </div>
 
-
     <div id="date-prompt" class="mb-3">
-      <p>Please enter start and end dates for your items.</p>
-      <button id="open-date-form" class="btn btn-primary btn-custom border-0 ">Enter Dates</button>
-    </div>
+       <p class="<%= 'text-danger' if line_item.start_date.blank? || line_item.end_date.blank? %>">
+         Please enter start and end dates for this item below.
+       </p>
+      </div>
 
     <%= form_with model: line_item, method: :put, action: line_item_path, local: true do |form| %>
       <div class="row mb-2">
