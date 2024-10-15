@@ -51,7 +51,6 @@ body {
   font-family: 'Krub', sans-serif;
   word-spacing: 1px;
   font-size: 1rem;
-//   font-weight: 400;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -133,3 +132,8 @@ h1 {
   font-size: 0.8rem;
   text-align: center;
 }
+
+.error {
+  color: red;
+}
+

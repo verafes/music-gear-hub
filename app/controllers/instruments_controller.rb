@@ -4,7 +4,16 @@ class InstrumentsController < ApplicationController
 
   # GET /instruments or /instruments.json
   def index
-    @instruments = Instrument.all.order("created_at desc")
+   if params[:user_id].present?
+       @instruments = Instrument.where(user_id: params[:user_id]).order("created_at desc")
+     else
+       @instruments = Instrument.all.order("created_at desc")
+     end
+  end
+
+  def my_instruments
+    @my_instruments = Instrument.where(user_id: current_user.id)
+    render :my_instruments
   end
 
   # GET /instruments/1 or /instruments/1.json

@@ -1,48 +1,43 @@
-<section>
-  <div>
-    <h2>Edit User</h2>
+<section class="container my-5">
+  <div class="row justify-content-center">
+    <div class="col-md-6">
+      <h2 class="text-center mb-4">Edit User</h2>
 
-    <%= simple_form_for(@user, url: user_path(@user), html: { method: :put }) do |f| %>
-      <%= f.error_notification %>
+      <%= simple_form_for(@user, url: user_path(@user), html: { method: :put, class: "needs-validation" }) do |f| %>
+        <%= f.error_notification %>
 
-      <div>
-        <div>
-          <%= f.input :name, required: true, autofocus: true %>
+        <div class="mb-3">
+          <%= f.input :name, required: true, autofocus: true, input_html: { class: "form-control" }, label_html: { class: "form-label" } %>
         </div>
+
+        <div class="mb-3">
+          <%= f.input :email, required: true, input_html: { class: "form-control" }, label_html: { class: "form-label" } %>
+        </div>
+
+        <div class="mb-3">
+          <%= f.input :password, autocomplete: "off", hint: "Leave blank if you don't want to change it", required: false, input_html: { class: "form-control" }, label_html: { class: "form-label" } %>
+        </div>
+
+        <div class="mb-3">
+          <%= f.input :password_confirmation, required: false, input_html: { class: "form-control" }, label_html: { class: "form-label" } %>
+        </div>
+
+        <div class="mb-3">
+          <%= f.input :current_password, hint: "We need your current password to confirm your changes", required: true, input_html: { class: "form-control" }, label_html: { class: "form-label" } %>
+        </div>
+
+        <div class="text-center mb-4">
+          <%= f.button :submit, "Update", class: "btn btn-primary btn-custom border-0 " %>
+        </div>
+      <% end %>
+
+      <div class="text-center mb-4">
+        <%= link_to "Back to profile", user_path(current_user), class: "btn btn-secondary btn-custom border-0" %>
       </div>
 
-      <div>
-        <div>
-          <%= f.input :email, required: true %>
-        </div>
-      </div>
-
-      <div>
-        <div>
-          <%= f.input :password, autocomplete: "off", hint: "Leave blank if you don't want to change it", required: false %>
-        </div>
-      </div>
-
-      <div>
-        <div>
-          <%= f.input :password_confirmation, required: false %>
-        </div>
-      </div>
-
-      <div>
-        <div>
-          <%= f.input :current_password, hint: "We need your current password to confirm your changes", required: true %>
-        </div>
-      </div>
-
-      <%= f.button :submit, "Update" %>
-    <% end %>
-    <div>
-      <%= link_to "Back to profile", user_path(current_user) %>
+      <hr />
+      <h3 class="text-center">Cancel my account</h3>
+      <p class="text-center">Unhappy? <%= link_to "Cancel my account", registration_path(:user), data: { confirm: "Are you sure?" }, method: :delete, class: "btn btn-danger" %></p>
     </div>
-
-    <hr />
-    <h3>Cancel my account</h3>
-    <p>Unhappy? <%= link_to "Cancel my account", registration_path(:user), data: { confirm: "Are you sure?" }, method: :delete %></p>
   </div>
 </section>

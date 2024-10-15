@@ -1,11 +1,26 @@
-<p style="color: green"><%= notice %></p>
+<section class="container my-5">
+  <div class="row justify-content-center">
+    <div class="col-md-6">
+      <%= simple_form_for(@user, url: user_path(@user), html: { method: :put, class: "needs-validation" }) do |f| %>
+        <% if notice %>
+          <div class="alert alert-success" role="alert">
+            <%= notice %>
+          </div>
+        <% end %>
 
-<p>
-  <strong>Name:</strong>
-  <%= @user.name %>
-</p>
-<p>
-  <strong>Email:</strong>
-  <%= @user.email %>
-</p>
-<%= link_to 'Edit Profile', edit_user_path(@user) %>
+        <div class="mb-3">
+          <%= f.input :name, input_html: { value: @user.name, class: "form-control", readonly: true } %>
+        </div>
+
+        <div class="mb-3">
+          <%= f.input :email, input_html: { value: @user.email, class: "form-control", readonly: true } %>
+        </div>
+
+        <div class="text-center mb-4">
+          <%= link_to 'Edit Profile', edit_user_path(@user), class: 'btn btn-primary btn-custom border-0 ' %>
+          <%= link_to 'My Instruments', instruments_path(user_id: current_user.id), class: 'btn btn-secondary btn-custom border-0 ms-2' %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</section>

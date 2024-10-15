@@ -9,32 +9,56 @@ class UsersController < ApplicationController
       else
         @current_user = nil
       end
+
+      if params[:category].present?
+            @instrument = @instruments.where(category: params[:category])
+          end
+    end
+
+    # GET /users/new
+    def new
+      @user = User.new
     end
 
     # Show user profile
     def show
     end
 
-    # Edit user profile
-    def edit
-    end
-
-    # Update user profile
-    def update
-      if @user.valid_password?(params[:user][:current_password])
-        if @user.update(user_params)
-          bypass_sign_in(@user)
-          redirect_to @user, notice: 'Your profile has been updated.'
+    # POST /users or /users.json
+    def create
+      @user = User.new(user_params)
+      respond_to do |format|
+        if @user.save
+          format.html { redirect_to user_url(@user), notice: "User was successfully created." }
+          format.json { render :show, status: :created, location: @user }
+        else
+          format.html { render :new, status: :unprocessable_entity }
+          format.json { render json: @user.errors, status: :unprocessable_entity }
         end
-      else
-        render :edit
       end
     end
 
+
+    # PATCH/PUT /users/1 or /users/1.json
+    def update
+      respond_to do |format|
+        if @user.update(user_params)
+          format.html { redirect_to user_url(@user), notice: "User was successfully updated." }
+          format.json { render :show, status: :ok, location: @user }
+        else
+          format.html { render :edit, status: :unprocessable_entity }
+          format.json { render json: @user.errors, status: :unprocessable_entity }
+        end
+      end
+    end
+
+
     def destroy
-        session.clear
-#         @user.destroy
-        redirect_to root_path, notice: 'User account has been deleted.'
+      @user.destroy!
+      respond_to do |format|
+        format.html { redirect_to users_url, notice: "User was successfully deleted." }
+        format.json { head :no_content }
+      end
     end
 
     private
