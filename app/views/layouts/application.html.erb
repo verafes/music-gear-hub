@@ -3,7 +3,7 @@
   <head>
     <title><%= content_for(:title) || "Music Gear Hub" %></title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="mobile-web-app-capable" content="yes">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
@@ -22,25 +22,32 @@
   </head>
 
   <body>
-    <% if flash[:alert].present? %>
-      <p class="my_alert text-center mt-3"><%= flash[:alert] %></p>
-    <% end %>
-
-    <nav class="navbar container-fluid banner-background">
-      <div class="navbar-brand">
+    <nav class="navbar container-fluid banner-background mb-3">
+      <div class="navbar-brand pt-3">
         <%= link_to root_path, class:"navbar-item" do %>
-          <h1 class="px-3">Music-Gear Hub</h1>
+          <h1 class="px-3 display-4">Music-Gear Hub</h1>
         <% end  %>
       </div>
 
       <div id="navbar" class="navbar-menu">
-        <div class="navbar-end">
+        <div class="navbar-end ">
           <div class="navbar-item">
-            <div class="field is-grouped d-flex flex-row">
+            <div class="field is-grouped d-flex flex-row align-items-center">
+
+              <% if total_cart_items %>
+                <%= link_to cart_path(@cart), class:"navbar-item button is-warning" do %>
+                  <span class="icon is-small">
+                    <i class="fa fa-shopping-cart"></i>
+                  </span>
+                  <span>
+                    Cart <%= cart_count_over_one %>
+                  </span>
+                <% end %>
+              <% end %>
 
               <% if user_signed_in? %>
                 <div class="nav-item mx-2">
-                  <%= link_to 'Sell', new_instrument_path, class: "btn btn-custom border-0" %>
+                  <%= link_to 'Post for Rent', new_instrument_path, class: "btn btn-custom border-0" %>
                 </div>
                 <div class="dropdown">
                     <%= link_to 'Account', "#", class: "btn btn-custom border-0 dropdown-toggle", id: "dropdownMenuButton", data: { toggle: "dropdown" }, aria: { haspopup: "true", expanded: "false" } %>
@@ -50,17 +57,22 @@
                     </div>
                   </div>
               <% else %>
-                <div class="nav-item me-2">
+                <div class="nav-item mx-2">
                   <%= link_to "Sign In", new_user_session_path, class: "btn btn-warning btn-custom border-0" %>
                 </div>
-              <div class="nav-item">
-                <%= link_to "Sign Up", new_user_registration_path, class: "btn btn-warning btn-custom border-0" %>
-              </div>
-            <% end %>
+
+                <div class="nav-item">
+                  <%= link_to "Sign Up", new_user_registration_path, class: "btn btn-warning btn-custom border-0" %>
+                </div>
+              <% end %>
           </div>
         </div>
       </div>
     </nav>
+
+    <% if flash[:alert].present? %>
+      <p class="my_alert text-center mt-3"><%= flash[:alert] %></p>
+    <% end %>
 
     <%= yield(:header) %>
 

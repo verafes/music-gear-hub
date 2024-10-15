@@ -6,28 +6,41 @@
       <div class="instrument-details card p-3">
         <div class="row">
           <div class="col-md-12">
-            <% if @instrument.image.attached? %>
-              <%= image_tag url_for(@instrument.image),
-                       style: "max-width: 250px; max-height: 250px; width: auto; height: auto; object-fit: contain;",
-                       alt: "Instrument image" %>
-            <% else %>
-              <p>No image available</p>
-            <% end %>
-
-            <h5 class="card-title my-3"><strong>Name:</strong> <%= @instrument.name %></h5>
-            <p><strong>Category:</strong> <%= @instrument.category %></p>
-            <p><strong>Description:</strong> <%= @instrument.description %></p>
-            <p><strong>Price per day:</strong> <%= number_to_currency(@instrument.price_per_day) %></p>
-            <p><strong>Available:</strong> <%= @instrument.available? ? "Yes" : "No" %></p>
-            <p><strong>Condition:</strong> <%= @instrument.condition.capitalize %></p>
+            <div class="d-flex justify-content-between align-items-bottom">
+              <% if @instrument.image.attached? %>
+                <%= image_tag url_for(@instrument.image),
+                         style: "max-width: 250px; max-height: 250px; width: auto; height: auto; object-fit: contain;",
+                         alt: "Instrument image" %>
+              <% else %>
+                <p>No image available</p>
+              <% end %>
+              <div class="text-center my-3">
+                <strong>Price per day:</strong>
+                <h4 class="title is-5 ms-1" style="display: inline;">
+                  <%= number_to_currency(@instrument.price_per_day) %>
+                <%= button_to 'Add to cart',
+                    line_items_path(instrument_id: @instrument),
+                    class: 'btn is-warning add-to-cart btn-custom border-0 mt-3'
+                %>
+              </div>
+            </div>
+              <h5 class="card-title my-3"><strong>Name:</strong> <%= @instrument.name %></h5>
+              <p><strong>Category:</strong> <%= @instrument.category %></p>
+              <p><strong>Description:</strong> <%= @instrument.description %></p>
+              <p><strong>Available:</strong> <%= @instrument.available? ? "Yes" : "No" %></p>
+              <p><strong>Condition:</strong> <%= @instrument.condition.capitalize %></p>
+            </div>
           </div>
-        </div>
       </div>
 
       <div class="d-flex mt-2">
-        <%= link_to "Edit this instrument", edit_instrument_path(@instrument), class: "btn btn-warning btn-custom border-0 me-3" %>
+        <% if user_signed_in? %>
+          <%= link_to "Edit", edit_instrument_path(@instrument), class: "btn btn-warning btn-custom border-0 me-3" %>
+        <% end %>
         <%= link_to "Back to instruments", instruments_path, class: "btn btn-secondary btn-custom border-0 me-3" %>
-        <%= button_to "Delete this instrument", @instrument, method: :delete, data: { confirm: "Are you sure?" }, class: "btn btn-danger" %>
+        <% if user_signed_in? %>
+          <%= button_to "Delete", @instrument, method: :delete, data: { confirm: "Are you sure?" }, class: "btn btn-danger" %>
+        <% end %>
       </div>
     </div>
   </div>
