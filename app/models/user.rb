@@ -1,5 +1,5 @@
 class User < ApplicationRecord
-  validates :name, presence: true
+  validates :name, presence: true, format: { with: /\A[\p{L}\-' ]+\z/ }
   validates :email, presence: true, uniqueness: true, email: true
   validates :password, password_strength: true
 
