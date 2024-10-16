@@ -25,6 +25,7 @@ user = User.new(
   password_confirmation: "a7&43Wcxy6ij"
 )
 user.save!
+
 instruments = [
   {
     name: "Gitara Harley Benton",
@@ -33,7 +34,7 @@ instruments = [
     available: true,
     condition: "used",
     description: "Used Harley Benton Cst 24 Deluxe Electric Guitar",
-    image: Rails.root.join("app/assets/images/gitara_harley_benton.jpg").open,
+    image: "gitara_harley_benton.jpg",
     user_id: 2,
   },
   {
@@ -43,7 +44,7 @@ instruments = [
     available: true,
     condition: "new",
     description: "Ohuhu Electric Piano Keyboard provides musical delight for every ability level. Rhythm, notes and melody are just the beginning!",
-    image: Rails.root.join("app/assets/images/ohuhu_keyboard_piano.jpg").open,
+    image: "piano_keyboard_ohuhu.jpg",
     user_id: 3,
   },
   {
@@ -53,7 +54,7 @@ instruments = [
     available: true,
     condition: "excellent",
     description: "The studio recording microphone grows alongside your studio setup equipment, like sound cards and mixers, which improves vocal speaking audio flexibility to make you explore various types of music recording singing.",
-    image: Rails.root.join("app/assets/images/microphone_fifine.jpg").open,
+    image: "microphone_fifine.jpg",
     user_id: 3,
   },
   {
@@ -63,7 +64,7 @@ instruments = [
     available: true,
     condition: "mint",
     description: "DISINO XLR to usb adapter doesn't need extra driver. Just plug the USB connector to your computer, your computer will recognize it as an audio input and will install all the necessary drivers automatically.",
-    image: Rails.root.join("app/assets/images/cable_usb_audio.jpg").open,
+    image: "cable_usb_audio.jpg",
     user_id: 3,
   },
   {
@@ -73,7 +74,19 @@ instruments = [
     available: true,
     condition: "mint",
     description: "Sakkusu Alto Saxophone. Solid construction and mechanism, comfortable key layout. Top F# key. This extra top note was introduced on most saxes in the 1960s and most teachers recommend it. High-Quality Pisoni Pads.",
-    image: Rails.root.join("app/assets/images/sakkusu_alto_saxophone.jpg").open,
+    image: "sakkusu_alto_saxophone.jpg",
     user_id: 2,
   }
 ]
+
+instruments.each do |instrument_attrs|
+  instrument = Instrument.new(instrument_attrs.except(:image))
+  instrument.image.attach(io: File.open(Rails.root.join("app/assets/images", instrument_attrs[:image])), filename: instrument_attrs[:image])
+
+  if instrument.save
+    puts "Instrument created: #{instrument.name}"
+  else
+    puts "Failed to create instrument: #{instrument.name}"
+    puts instrument.errors.full_messages.join(", ")
+  end
+end
