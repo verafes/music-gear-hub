@@ -22,6 +22,9 @@
       <div class="col-12">
         <strong><%= line_item.instrument.name %></strong>
       </div>
+      <div class="col-12">
+        <p><strong>Owner:</strong> <%= line_item.instrument.user&.name %></p>
+      </div>
     </div>
 
     <div class="row mb-2">
