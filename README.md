@@ -27,12 +27,19 @@ MusicGear Hub is a simple Ruby on Rails application that enables musicians to re
 ## Models & Associations
    This application features several key models:
 
-- **Instrument**: Represents musical instruments available for rent. Attributes include `name`, `category`, `price_per_day`, `availability`, `condition`, and an uploaded `image`. Each instrument belongs to a `User` (Owner) and can have multiple associated `Rentals`.
-- **User**: Contains the user's `name` and `email`, establishing a one-to-many relationship with `Instruments`.
-- **Cart**: Manages cart functionality, allowing users to add instruments and calculate the total price while associating multiple `Rent Items` to a user.
-- **Rent Item**: Captures rental transactions with attributes for `start_date` and `end_date`, linking back to both the user and the instrument involved.
+- **Instrument**: Represents musical instruments available for rent. Attributes include `name`, `category`, `description`, price_per_day`, `availability`, `condition`, and an uploaded `image`. Each instrument belongs to a `:user` and can have multiple associated `:line_items`.
+- **User**: Contains the user's `name` and `email`, establishing a one-to-many relationship with `:instruments` and `:line_items`.
+- **Cart**: Manages cart functionality, allowing users to add instruments and calculate the total price while associating multiple `:line_items` to a user. 
+- **LineItem** represents a rental transaction with attributes: `instrument_id`, `cart_id`, `start_date`, `end_date`, `total_days`, linking back to both the user and the instrument involved.
 
-   Validation rules ensure data integrity, requiring instruments to have necessary attributes and valid states, while users must provide their name and email. The application includes controllers for managing instruments, rentals, users, and carts, supporting full CRUD operations.
+## Validations
+
+The application includes controllers for managing instruments, rentals, users, and carts, supporting full CRUD operations.
+
+Validation rules ensure:
+
+- Instruments have required attributes and valid states.
+- Users provide a unique email address ans strong password.
 
 ## Installation
 
