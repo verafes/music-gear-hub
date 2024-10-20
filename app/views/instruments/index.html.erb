@@ -6,7 +6,11 @@
   <div class="hero-body">
     <% content_for :title, "Instruments" %>
     <div class="container">
-      <h1 class="title">Browse the latest instruments on Music-Gear Hub</h1>
+      <% if user_signed_in? %>
+        <h1 class="title">My Items</h1>
+      <% else %>
+        <h1 class="title">Browse the latest instruments on Music-Gear Hub</h1>
+      <% end %>
     </div>
   </div>
 </section>
@@ -18,7 +22,11 @@
       <div class="col-md-4 mb-4">
         <div class="card p-3 border-light">
           <div class="instrument-thumb mb-2 d-flex flex-row">
-            <%= link_to image_tag(url_for(instrument.image), size: "150x150", class: "card-img-top", style: "object-fit: contain; "), instrument %>
+            <% if instrument.image.attached? %>
+              <%= link_to image_tag(url_for(instrument.image), size: "150x150", class: "card-img-top", style: "object-fit: contain;"), instrument %>
+            <% else %>
+              <%= link_to image_tag("default_image.jpg", size: "150x150", class: "card-img-top", style: "object-fit: contain;"), instrument %>
+            <% end %>
           </div>
           <h5 class="card-title my-3">Item Details</h5>
           <p class="mb-1">
@@ -68,7 +76,7 @@
   </div>
   <div class="d-flex mt-2 ">
     <% if user_signed_in? %>
-      <%= link_to "New instrument", new_instrument_path, class: "btn btn-primary btn-custom border-0 mx-3 my-3" %>
+      <%= link_to "Add a new item for rent", new_instrument_path, class: "btn btn-primary btn-custom border-0 mx-3 my-3" %>
     <% end %>
   </div>
 </div>

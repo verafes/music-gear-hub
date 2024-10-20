@@ -12,7 +12,7 @@
                          style: "max-width: 250px; max-height: 250px; width: auto; height: auto; object-fit: contain;",
                          alt: "Instrument image" %>
               <% else %>
-                <p>No image available</p>
+                <%= link_to image_tag("default_image.jpg", size: "150x150", class: "card-img-top", style: "object-fit: contain;"), @instrument %>
               <% end %>
               <div class="text-center my-3">
                 <strong>Price per day:</strong>
@@ -38,9 +38,13 @@
         <% if user_signed_in? %>
           <%= link_to "Edit", edit_instrument_path(@instrument), class: "btn btn-warning btn-custom border-0 me-3" %>
         <% end %>
-        <%= link_to "Back to instruments", instruments_path, class: "btn btn-secondary btn-custom border-0 me-3" %>
+        <%= link_to "Back to items listings", instruments_path, class: "btn btn-secondary btn-custom border-0 me-3" %>
         <% if user_signed_in? && @instrument.user_id == current_user.id %>
-          <%= button_to "Delete", @instrument, method: :delete, data: { confirm: "Are you sure?" }, class: "btn btn-danger" %>
+          <% if session[:confirm_delete_with_line_items] == @instrument.id %>
+            <%= button_to "Yes, delete item", @instrument, method: :delete, class: "btn btn-danger" %>
+          <% else %>
+            <%= button_to "Delete", @instrument, method: :delete, data: { confirm: "Are you sure?" }, class: "btn btn-danger" %>
+          <% end %>
         <% end %>
       </div>
     </div>
