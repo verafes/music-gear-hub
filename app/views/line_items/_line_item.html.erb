@@ -37,21 +37,35 @@
     </div>
 
     <div id="date-prompt" class="mb-3">
-       <p class="<%= 'text-danger' if line_item.start_date.blank? || line_item.end_date.blank? %>">
-         Please enter start and end dates for this item below.
-       </p>
-      </div>
+      <p class="<%= line_item.start_date.blank? || line_item.end_date.blank? ? 'text-danger' : 'text-muted' %>">
+        <%= line_item.start_date.blank? || line_item.end_date.blank? ? 'Please choose below start and end dates for your rental:' : 'Start and end dates confirmed for rental:' %>
+      </p>
+    </div>
 
     <%= form_with model: line_item, method: :put, action: line_item_path, local: true do |form| %>
       <div class="row mb-2">
         <div class="col-6">
           <strong>Rental starts:</strong>
-          <%= form.date_field :start_date, value: line_item.start_date, class: 'form-control', required: true, id: "start_date_#{line_item.id}" %>
+          <%= form.date_field(
+                  :start_date,
+                  value: line_item.start_date,
+                  class: 'form-control',
+                  required: true,
+                  id: "start_date_#{line_item.id}",
+                  min: Date.today
+          ) %>
         </div>
 
         <div class="col-6 text-end">
           <strong>Rental ends:</strong>
-          <%= form.date_field :end_date, value: line_item.end_date, class: 'form-control', required: true, id: "end_date_#{line_item.id}" %>
+          <%= form.date_field(
+                    :end_date,
+                    value: line_item.end_date,
+                    class: 'form-control',
+                    required: true,
+                    id: "end_date_#{line_item.id}",
+                    min: Date.today
+          ) %>
         </div>
       </div>
 
@@ -69,7 +83,7 @@
     <div class="row mt-4">
       <div class="col-12 text-end">
         <p>
-          Total Price for <%= line_item.total_days %> days:
+          Total price for <%= line_item.total_days %> days:
           <strong class="h4"> <%= number_to_currency(line_item.total_price) %></strong>
         </p>
       </div>
