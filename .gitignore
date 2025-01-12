@@ -39,3 +39,4 @@ vendor/*
 # IDEas
 /.idea
 /.vscode
+Gemfile.lock
