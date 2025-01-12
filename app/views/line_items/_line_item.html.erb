@@ -10,7 +10,7 @@
                            alt: "Instrument image",
                            style: "max-width: 150px; max-height: 150px; width: auto; height: auto; object-fit: contain;" %>
           <% else %>
-            <p>No image available</p>
+            <%= link_to image_tag("default_image.jpg", size: "150x150", class: "card-img-top", style: "object-fit: contain;"), @instrument %>
           <% end %>
         </figure>
       </div>
@@ -37,21 +37,35 @@
     </div>
 
     <div id="date-prompt" class="mb-3">
-       <p class="<%= 'text-danger' if line_item.start_date.blank? || line_item.end_date.blank? %>">
-         Please enter start and end dates for this item below.
-       </p>
-      </div>
+      <p class="<%= line_item.start_date.blank? || line_item.end_date.blank? ? 'text-danger' : 'text-muted' %>">
+        <%= line_item.start_date.blank? || line_item.end_date.blank? ? 'Please choose below start and end dates for your rental:' : 'Start and end dates confirmed for rental:' %>
+      </p>
+    </div>
 
     <%= form_with model: line_item, method: :put, action: line_item_path, local: true do |form| %>
       <div class="row mb-2">
         <div class="col-6">
           <strong>Rental starts:</strong>
-          <%= form.date_field :start_date, value: line_item.start_date, class: 'form-control', required: true, id: "start_date_#{line_item.id}" %>
+          <%= form.date_field(
+                  :start_date,
+                  value: line_item.start_date,
+                  class: 'form-control',
+                  required: true,
+                  id: "start_date_#{line_item.id}",
+                  min: Date.today
+          ) %>
         </div>
 
         <div class="col-6 text-end">
           <strong>Rental ends:</strong>
-          <%= form.date_field :end_date, value: line_item.end_date, class: 'form-control', required: true, id: "end_date_#{line_item.id}" %>
+          <%= form.date_field(
+                    :end_date,
+                    value: line_item.end_date,
+                    class: 'form-control',
+                    required: true,
+                    id: "end_date_#{line_item.id}",
+                    min: Date.today
+          ) %>
         </div>
       </div>
 
@@ -61,7 +75,7 @@
       </div>
 
       <div class="col-12 text-end">
-        <%= form.hidden_field "cart", value: cart.id.to_s %>
+        <%= form.hidden_field :cart, value: @cart.id, id: "cart-id-field" %>
         <%= form.submit "Save Dates", class: "btn btn-primary mt-2 btn-sm btn-custom border-0" %>
       </div>
     <% end %>
@@ -69,7 +83,7 @@
     <div class="row mt-4">
       <div class="col-12 text-end">
         <p>
-          Total Price for <%= line_item.total_days %> days:
+          Total price for <%= line_item.total_days %> days:
           <strong class="h4"> <%= number_to_currency(line_item.total_price) %></strong>
         </p>
       </div>

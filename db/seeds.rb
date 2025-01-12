@@ -74,9 +74,19 @@ instruments = [
     available: true,
     condition: "mint",
     description: "Sakkusu Alto Saxophone. Solid construction and mechanism, comfortable key layout. Top F# key. This extra top note was introduced on most saxes in the 1960s and most teachers recommend it. High-Quality Pisoni Pads.",
-    image: "sakkusu_alto_saxophone.jpg",
+    image: "sakkusu-alto-saxophone.jpg",
     user_id: 2,
-  }
+  },
+    {
+      name: "Bass Drum",
+      category: "Musical Instruments",
+      price_per_day: 75.0,
+      available: true,
+      condition: "used",
+      description: "Pipe band bass drums designed to excel on the field, in any climate. The free floating all-birch shell delivers unrestricted resonance which emits a warm, mellow tone when struck.",
+      image: "dram_bass.jpg",
+      user_id: 2,
+    }
 ]
 
 instruments.each do |instrument_attrs|
